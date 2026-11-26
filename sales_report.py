@@ -29,15 +29,26 @@ orders = [
 def total_sales(orders):
     total = 0
     for order in orders:
-        total = total + order["price"] * order["quantity"]
+        if order["status"] == "completed":
+            total += order["price"] * order["quantity"]
     return total
+
+
+def count_completed_orders(orders):
+    count = 0
+    for order in orders:
+        if order["status"] == "completed":
+            count += 1
+    return count
 
 
 def main():
     total = total_sales(orders)
+    count = count_completed_orders(orders)
     print("=== Hanami Goods Weekly Sales Report ===")
     print("Period: 2026-11-09 to 2026-11-15")
     print(f"Total sales: {total} yen")
+    print(f"Completed orders: {count}")
 
 
 main()
